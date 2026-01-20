@@ -61,11 +61,72 @@ O ambiente passou a ser mais **organizado, escalável e financeiramente sustent�
 
 ---
 
-## 📎 Anexos
+# 📎 Anexos
 
-* Relatórios de análise de custos da AWS
-* Registros das configurações aplicadas
-* Diagramas da arquitetura do ambiente
+## 📊 Anexo A — Relatórios de Análise de Custos da AWS
+
+### Resumo de Custos (Antes x Depois)
+
+| Serviço | Situação Inicial (R$) | Situação Após Otimização (R$) | Ação Aplicada | Impacto |
+| :--- | :--- | :--- | :--- | :--- |
+| **EC2** | 1.200,00 | 750,00 | Rightsizing + desligamento automático | `-37,5%` |
+| **RDS** | 600,00 | 420,00 | Ajuste de classe + armazenamento escalável | `-30%` |
+| **S3** | 300,00 | 180,00 | Políticas de ciclo de vida | `-40%` |
+| **Total** | **2.100,00** | **1.350,00** | — | **-35,7%** |
+
+> [!NOTE]
+> **Observações:**
+> * Os valores são estimativas baseadas no uso mensal do ambiente.
+> * A análise foi realizada com base em métricas de consumo e recomendações do **AWS Trusted Advisor**.
+
+---
+
+## ⚙️ Anexo B — Registros das Configurações Aplicadas
+
+#### 🖥️ Amazon EC2
+- Redimensionamento de instâncias para tipos adequados à carga real.
+- Desligamento automático de ambientes não produtivos fora do horário comercial.
+- Remoção de instâncias ociosas identificadas pelo Trusted Advisor.
+
+#### 🗄️ Amazon RDS
+- Seleção de classe de instância compatível com a demanda.
+- Ativação de backups automáticos.
+- Configuração de armazenamento escalável.
+
+#### 📦 Amazon S3
+- Criação de buckets para arquivos estáticos e backups.
+- Aplicação de políticas de ciclo de vida.
+- Transição automática para classes de armazenamento de menor custo.
+
+---
+
+## 🗺️ Anexo C — Diagrama da Arquitetura do Ambiente
+
+```mermaid
+graph TD
+    User((Usuário)) --> App[Aplicação]
+    App --> EC2[Amazon EC2 <br/><i>Compute</i>]
+    App --> RDS[Amazon RDS <br/><i>Database</i>]
+    App --> S3[Amazon S3 <br/><i>Storage / Backups</i>]
+    
+    TA[AWS Trusted Advisor] -.->|Otimização| EC2
+    TA -.->|Otimização| RDS
+    TA -.->|Otimização| S3
+    
+    style TA fill:#f9f,stroke:#333,stroke-width:2px
+
+```
+
+Descrição do Diagrama:
+
+A aplicação é hospedada em instâncias EC2.
+
+O banco de dados é gerenciado pelo Amazon RDS.
+
+Arquivos e backups são armazenados no Amazon S3.
+
+O AWS Trusted Advisor fornece recomendações contínuas para otimização e boas práticas.
+
 
 ---
 
